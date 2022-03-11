@@ -1,4 +1,4 @@
-<htmt>
+<htmt id="page1">
  	<head>
  		 <!-- Required meta tags -->
     	<meta charset="utf-8">
@@ -9,8 +9,14 @@
 
     	<!-- Bootstrap CSS -->
     	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    	<link href="estilo.css" rel="stylesheet">
-
+    	<style >
+    		body {
+  				margin-top: 20px;
+ 				margin-bottom: 20px;
+  				margin-right: 20px;
+  				margin-left: 20px;
+				}
+    	</style>
 
     	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,6 +27,8 @@
  	</head>
  	
  	<body>
+ 		<div> 
+ 		</div><br>
  		<div>
  			<span>	<label for="funcionario">Técnico:</label>
 			<input list="funcionarios" name="funcionario" id="funcionario">
@@ -33,11 +41,11 @@
   			<option value="Paulo">
 			</datalist>
 			</span>
- 			<span>Cliente: <input type="text" name="" size="50"></span>
+ 			<span>Cliente: <input type="text" id="Cliente" name="" size="30"></span>
  		</div><br>
  		<div>
- 			<span>Inicio do atendimento: <input type="date" name="" size="50"></span>
- 			<span>Previa da conclusão: <input type="date" name="" size="50"></span>
+ 			<span>Inicio do atendimento: <input type="date" id="inicio" name="" size="20"></span>
+ 			<span>Previa da conclusão: <input type="date" id="fim" name="" size="20"></span>
  		</div><br>
  		<div>
  			<label for="browser">Padrões</label>
@@ -72,14 +80,52 @@
 		}
 
 		function CriaPDF() {
-        var tecnico = "Tecnico :"+document.getElementById('funcionario').value;
+        var tecnico = document.getElementById('funcionario').value;
+        var cliente = document.getElementById('Cliente').value;
         // CRIA UM OBJETO WINDOW
         var win = window.open('', '', 'height=700,width=700');
         win.document.write('<html><head>');
-        win.document.write('<title>LISTA DE EQUIPAMENTOS</title>');   // <title> CABEÇALHO DO PDF.
-        win.document.write(tecnico);
+        win.document.write('<title >LISTA DE EQUIPAMENTOS</title>');   // <title> CABEÇALHO DO PDF.
+        win.document.write('<style>');
+		win.document.write('p.dotted {border-style: dotted;}');
+		win.document.write('p.dashed {border-style: dashed;}');
+		win.document.write('.solid {border-style: solid;}');
+		win.document.write('p.double {border-style: double;}');
+		win.document.write('p.groove {border-style: groove;}');
+		win.document.write('p.ridge {border-style: ridge;}');
+		win.document.write('p.inset {border-style: inset;}');
+		win.document.write('p.outset {border-style: outset;}');
+		win.document.write('p.none {border-style: none;}');
+		win.document.write('p.hidden {border-style: hidden;}');
+		win.document.write('p.mix {border-style: dotted dashed solid double;}');
+		win.document.write('</style>');
         win.document.write('</head>');
         win.document.write('<body>');
+        win.document.write('<div>   </div>');
+        win.document.write('<div>');
+         win.document.write('<h4>Cliente :');
+        win.document.write(cliente);
+        win.document.write('</h4>');
+        win.document.write('<h4>');
+        win.document.write('Tecnico Responsável pelos os equipamento: '+tecnico);
+        win.document.write('</h4>');
+
+       
+        win.document.write('</div>');
+        win.document.write('<span>');
+        win.document.write('Data da retirada: ');
+        win.document.write(document.getElementById('inicio').value);
+        win.document.write('</span>');
+        win.document.write('<span>&nbsp&nbsp&nbsp');
+        win.document.write('Data da devolução: ');
+        win.document.write(document.getElementById('fim').value);
+        win.document.write('</span>');
+        win.document.write('<h3>');
+        win.document.write('Lista dos utilizados ');
+        win.document.write('</h3>');
+        win.document.write('<div class="solid">');        
+        win.document.write(document.getElementById('w3review').value.replace(/\n/gi,'<br>'));
+        win.document.write('</div>');
         win.document.write('</body></html>');
         win.document.close(); 	                                         // FECHA A JANELA
         win.print();                                                           // IMPRIME O CONTEUDO

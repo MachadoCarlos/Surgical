@@ -1,0 +1,95 @@
+<htmt>
+ 	<head>
+ 		 <!-- Required meta tags -->
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    	<title>Controle de Padrão</title>
+
+    	<!-- Bootstrap CSS -->
+    	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="estilo.css" rel="stylesheet">
+
+
+    	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    	<!--[if lt IE 9]>
+      	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    	<![endif]-->	
+ 	</head>
+ 	
+ 	<body>
+ 		<div>
+ 			<span>	<label for="funcionario">Técnico:</label>
+			<input list="funcionarios" name="funcionario" id="funcionario">
+			<datalist id="funcionarios">
+  			<option value="Alberto">
+  			<option value="Bruno">
+  			<option value="Carlos">
+  			<option value="Diego">
+  			<option value="Guilherme">
+  			<option value="Paulo">
+			</datalist>
+			</span>
+ 			<span>Cliente: <input type="text" name="" size="50"></span>
+ 		</div><br>
+ 		<div>
+ 			<span>Inicio do atendimento: <input type="date" name="" size="50"></span>
+ 			<span>Previa da conclusão: <input type="date" name="" size="50"></span>
+ 		</div><br>
+ 		<div>
+ 			<label for="browser">Padrões</label>
+			<input list="browsers" name="browser" id="browser" size="50">
+
+			<datalist id="browsers">
+  			<option value="ANALISADOR DE SEGURAÇÃO ELETRICA">
+  			<option value="ANALISADOR DE VENTILAÇÃO MECÂNICA">
+  			<option value="ANALISADOR DE BISTURI">
+  			<option value="ANALISADOR DE BOMBA DE INFUSÃO">
+  			<option value="SIMULADO DE ECG">
+  			<option value="SIMULADO DE MULTIPARAMETRICO">
+			</datalist>
+			<button >Incluir</button>
+ 		</div>
+ 		
+ 		<div>
+ 			<label for="w3review">EQUIPAMENTOS EM USO</label><br>
+			<textarea id="w3review" name="w3review" rows="10" cols="100"></textarea>
+ 	    </div>
+
+ 	    <p>
+        	<input type="button" value="Criar PDF" id="btnImprimir" onclick="CriaPDF()" />
+    	</p>
+ 	    <script type="text/javascript">
+    		var button = document.querySelector('button');
+
+		button.onclick = function() {
+			var equipamento = document.getElementById('browser').value;
+			document.getElementById('w3review').value=document.getElementById('w3review').value+equipamento+'\n';
+			document.getElementById('browser').value="";
+		}
+
+		function CriaPDF() {
+        var tecnico = "Tecnico :"+document.getElementById('funcionario').value;
+        // CRIA UM OBJETO WINDOW
+        var win = window.open('', '', 'height=700,width=700');
+        win.document.write('<html><head>');
+        win.document.write('<title>LISTA DE EQUIPAMENTOS</title>');   // <title> CABEÇALHO DO PDF.
+        win.document.write(tecnico);
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write('</body></html>');
+        win.document.close(); 	                                         // FECHA A JANELA
+        win.print();                                                           // IMPRIME O CONTEUDO
+    	}
+    	</script>
+
+
+ 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+ 	</body>
+</html>
